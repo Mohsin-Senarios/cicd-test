@@ -19,16 +19,3 @@ jobs:
         for branch in $(git branch --format '%(refname:short)' | grep -v 'main'); do
           git pull origin main:$branch
         done
-
-    - name: Build and Test
-      run: |
-        # Your build and test commands go here
-        # Example:
-        # mvn clean install
-
-    - name: Deploy
-      if: success()
-      run: |
-        # Your deployment commands go here
-        # Example:
-        # ansible-playbook deploy.yml
