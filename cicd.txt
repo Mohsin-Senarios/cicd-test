@@ -1,3 +1,14 @@
+for branch in $(git branch -r | grep -v HEAD | grep -v main); do
+  git checkout "${branch#origin/}"
+  git pull origin main
+  git push
+  hub pull-request -m "Update from main branch" -b "${branch#origin/}" -h feature/update-all-branches
+done
+
+
+
+
+
 name: CI/CD Pipeline
 
 on:
