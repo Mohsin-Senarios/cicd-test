@@ -9,17 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
       uses: actions/checkout@v2
-      with:
-        ref: main
 
-    - name: Pull to Branches
+    - name: print all branches
       run: |
-        for branch in $(git branch -r | grep -v HEAD | grep -v main); do
-          echo ${branch}
-          git checkout "${branch}"
-          git pull origin main
-          git push
-          hub pull-request -m "Update from main branch" -b "${branch#origin/}" -h feature/update-all-branches
+        for branch in $(git for-each-ref --format='%(*-dev)' refs/heads/); do
+          git log --oneline "$branch" ^origin/master
         done
