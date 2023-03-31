@@ -15,6 +15,6 @@ jobs:
           fetch-depth: 0
       - name: print all branches
         run: |
-          for branch in $(git for-each-ref --format='%(*-dev)' refs/heads/); do
+          for branch in $(git for-each-ref --format='%(testing-dev)' refs/heads/); do
             git log --oneline "$branch" ^origin/master
           done
