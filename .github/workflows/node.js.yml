@@ -5,14 +5,11 @@ on:
     branches: [main]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  steps:
+    uses: actions/checkout@v2
 
-    steps:
-      uses: actions/checkout@v2
-
-    - name: print all branches
-      run: |
-        for branch in $(git for-each-ref --format='%(*-dev)' refs/heads/); do
-          git log --oneline "$branch" ^origin/master
-        done
+  - name: print all branches
+    run: |
+      for branch in $(git for-each-ref --format='%(*-dev)' refs/heads/); do
+        git log --oneline "$branch" ^origin/master
+      done
